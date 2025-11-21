@@ -14,7 +14,7 @@ So Claude's right, that's exactly it.  I had previously tried using copilot and 
 
 I don't really write code anymore, I just design, plan, refine, and code review.  It's easier to just tell Claude to change a variable name because it will rename the variable, fix all the javadocs, and update any random documentation that mentioned the variable name.  I normally have a bunch of terminals all grinding away working on plans in the various services in parallel, it's like a video game.
 
-I think the future is here, and it's pretty exciting.  People aren't into chatbots, neither was I.  Building this project opened my eyes into ways of using and choreographing AI that I hadn't even considered.  It's a pretty exciting time to be alive, I feel like a physicist who was lucky enough to be around in the 1930s and 40s while they were building the bomb.  We don't know where this is gonna take us, but there's no resisting, it's clear this is the path of history.
+I think the future is here, and it's pretty exciting.  People aren't into chatbots- neither was I.  Building this project opened my eyes into ways of using and choreographing AI that I hadn't even considered.  It's a pretty exciting time to be alive, I feel like a physicist who was lucky enough to be around in the 1930s and 40s while they were building the bomb.  We don't know where this is gonna take us, but there's no resisting, it's clear this is the path of history.
 
 ## Vision
 
