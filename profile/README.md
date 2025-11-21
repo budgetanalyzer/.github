@@ -1,14 +1,20 @@
 # Budget Analyzer
 
-**Production-grade microservices security infrastructure built with AI-assisted development**
+**Production-grade microservices security infrastructure and ReactJS frontend built with AI-assisted development**
 
 ---
 
 ## The Story
 
-This project started as a simple personal budget tracker. What changed everything was discovering how powerful AI-assisted development could be.
+This project started as a simple re-fresh on my spring boot microservices skills after a 2 year sabbatical.  I wanted to solve a simple problem of reconciling my bank accounts across different countries and currencies, so I figured I'd do a quick microservice + ReactJS frontend and go find a consulting role as I've been doing the last few years.  I was shocked to finish that in a couple weeks after gettting comfortable using Claude Code, so I expanded the scope to be a demo of using AI to write code.  This is a full production grade best practices Backend For Frontend Oauth2 security design for an auditable compliance-oriented financial application.  But really it's just an AI sandbox.  And now I'm excited to go back to building stuff and don't want to just chill and do easy consulting gigs anymore.
 
-Using **Claude Code**, we rapidly expanded from a basic app to a full enterprise-grade security architecture. The AI didn't just write code—it helped design systems, document decisions, and implement patterns that would typically require a dedicated team.
+:sparkles: *Using **Claude Code**, we rapidly expanded from a basic app to a full enterprise-grade security architecture. The AI didn't just write code—it helped design systems, document decisions, and implement patterns that would typically require a dedicated team.*   (*Claude wrote that*)
+
+So Claude's right, that's exactly it.  I had previously tried using copilot and code assist and was thoroughly unimpressed.  I didn't grok it until i stopped trying to use it as a code assist tool but instead use it as a pair programmer for design and implementation.  We discussed and interated on plans, if you watch the repo I frequently check in plans to give an idea of how detailed they *git*.  I didn't type a line of code in [budget-analyzer-web] (https://github.com/budgetanalyzer/budget-analyzer-web), but that is a fully functional ReactJS app using best practices from [bulletproof react] (https://github.com/alan2207/bulletproof-react).  
+
+I don't really write code anymore, I just design, plan, refine, and code review.  It's easier to just tell Claude to change a variable name because it will rename the variable, fix all the javadocs, and update any random documentation that mentioned the variable name.  I normally have a bunch of terminals all grinding away working on plans in the various services in parallel, it's like a video game.
+
+I think the future is here, and it's pretty exciting.  People aren't into chatbots, neither was I.  Building this project opened my eyes into ways of using and choreographing AI that I hadn't even considered.  It's a pretty exciting time to be alive, I feel like a physicist who was lucky enough to be around in the 1930s and 40s while they were building the bomb.  We don't know where this is gonna take us, but there's no resisting, it's clear this is the path of history.
 
 ## Vision
 
@@ -22,6 +28,8 @@ The goal isn't just a budget app. It's a reusable foundation that demonstrates:
 - Defense-in-depth security layers
 
 Once these patterns mature, this becomes a template for enterprise applications—drop in your business logic and inherit battle-tested security.
+
+But we're also in parallel figuring out how to use AI on a team.  For example here is a quick plan to figure out the best approach to avoid vendor lock-in for AI service providers.  We should be able to swap out and experiment with Gemini and Claude and whatever comes next: https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/ai-coding-assistant-configuration-plan.md).  The criticism I keep hearing about AI is that it's great for greenfield projects like this, but it breaks for a real company with a large complex codebase.  My hypothesis is that we simply haven't quite formalized the best practices for doing those migrations, but I think it's possible to introduce these AI development tools into a mature system by starting on leaf nodes and working your way up documenting functionality.  For example create a CLAUDE.md file in a single microservice or piece of the architecture and focus on getting it working well there, and then expand outwards.  I think it's a mistake to try to use a top-down approach introducing these tools.
 
 ## Architecture
 
@@ -87,7 +95,7 @@ This project demonstrates what's achievable when AI augments development:
 - **Documentation** — Living docs that stay current with the code
 - **Code review** — Pattern consistency and security considerations
 
-The rapid expansion from simple app to enterprise architecture was only possible through AI assistance. This isn't just a showcase—it's a proof point for AI-augmented software development.
+:sparkles: *The rapid expansion from simple app to enterprise architecture was only possible through AI assistance. This isn't just a showcase—it's a proof point for AI-augmented software development.*
 
 ## Technology Stack
 
