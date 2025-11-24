@@ -1,20 +1,41 @@
 # Budget Analyzer
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **Production-grade microservices security infrastructure and ReactJS frontend built with AI-assisted development**
+
+---
+
+## Who This Is For
+
+✨ *This project targets **enterprise architects and senior developers** who want to see production-ready patterns in action—not tutorials or hand-holding. If you're evaluating BFF security patterns, OAuth2 implementation approaches, or AI-assisted development workflows, this is a working reference you can clone, run, and adapt.*
+
+**What you'll find:**
+- Real OAuth2/OIDC implementation with defense-in-depth
+- BFF pattern that keeps JWTs server-side (no XSS exposure)
+- Clean separation between security infrastructure and business logic
+- Documentation written for people who already understand microservices
+
+**What you won't find:**
+- Step-by-step explanations of basic concepts
+- Simplified examples that don't reflect production reality
+- Vendor lock-in or proprietary dependencies
 
 ---
 
 ## Background
 
-This project started as a simple re-fresh of my spring boot microservices skills after a 2 year sabbatical.  I wanted to solve the relatively simple problem of reconciling multiple bank accounts in multiple currencies, so I figured I'd do a quick microservice + ReactJS frontend and go find a consulting role as I've been doing the last few years.  I was shocked to finish that in a couple weeks after gettting comfortable using Claude Code, so I expanded the scope of the project significantly.  This is a full production grade best practices Backend For Frontend Oauth2 security implementation for an auditable compliance-oriented financial application.  But really it's just an AI sandbox.  And now I'm excited to go back to building stuff and am looking to work with people that get what this is.
+This project started as a simple re-fresh of my spring boot microservices skills after a 2 year sabbatical.  I wanted to solve the relatively simple problem of reconciling multiple bank accounts in multiple currencies, so I figured I'd do a quick microservice + ReactJS frontend and go find a consulting role as I've been doing the last few years.  I was shocked to finish that in a couple weeks after gettting comfortable using Claude Code, so I expanded the scope of the project significantly.  This is a full production grade best practices Backend For Frontend Oauth2 Security implementation for an auditable compliance-oriented financial application.  But really it's just an AI sandbox.  And now I'm excited to go back to building stuff and am looking to work with people that get what this is.
 
-:sparkles: *Using **Claude Code**, we rapidly expanded from a basic app to a full enterprise-grade security architecture. The AI didn't just write code—it helped design systems, document decisions, and implement patterns that would typically require a dedicated team.*   (*Claude wrote that*)
+✨ *Using **Claude Code**, we rapidly expanded from a basic app to a full enterprise-grade security architecture. The AI didn't just write code—it helped design systems, document decisions, and implement patterns that would typically require a dedicated team.*   (*Claude wrote that*)
 
 So Claude's right, that's exactly it.  I had previously tried using copilot and code assist and was thoroughly unimpressed.  I didn't grok it until i stopped trying to use it as a code assist tool but instead use it as a pair programmer for design and implementation.  We discussed and interated on plans, if you watch the repo I frequently check in plans to give an idea of how detailed they get.  I didn't type a line of code in [budget-analyzer-web](https://github.com/budgetanalyzer/budget-analyzer-web), but that is a fully functional ReactJS app using best practices from [bulletproof react](https://github.com/alan2207/bulletproof-react).
 
 I don't really write code anymore, I just design, plan, refine, and code review.  It's easier to just tell Claude to change a variable name because it will rename the variable, fix all the javadocs, and update any random documentation that mentioned the variable name.  I normally have a bunch of terminals all grinding away working on plans in the various services in parallel, it's like a video game.
 
 I think the future is here, and it's pretty exciting.  People aren't into chatbots- neither was I.  Building this project opened my eyes into ways of using and choreographing AI that I hadn't even considered.  It's a pretty exciting time to be alive, I feel like a physicist who was lucky enough to be around in the 1930s and 40s while they were building the bomb.  We don't know where this is gonna take us, but there's no resisting, it's clear this is the path of history.
+
+I think the future is run by architects across various domains...
 
 ## Vision
 
@@ -95,7 +116,7 @@ This project demonstrates what's achievable when AI augments development:
 - **Documentation** — Living docs that stay current with the code
 - **Code review** — Pattern consistency and security considerations
 
-:sparkles: *The rapid expansion from simple app to enterprise architecture was only possible through AI assistance. This isn't just a showcase—it's a proof point for AI-augmented software development.*
+✨ *The rapid expansion from simple app to enterprise architecture was only possible through AI assistance. This isn't just a showcase—it's a proof point for AI-augmented software development.*
 
 ## Technology Stack
 
@@ -125,30 +146,9 @@ This project demonstrates what's achievable when AI augments development:
 
 ## Getting Started
 
-### Prerequisites
-- Docker and Docker Compose
-- JDK 17+
-- Node.js 18+
-- [mkcert](https://github.com/FiloSottile/mkcert) (for local HTTPS)
+✨ *Clone and play. The orchestration repo has everything you need to run the full stack locally with Tilt + Kind.*
 
-### Quick Start
-
-```bash
-# Clone the orchestration repo
-git clone https://github.com/budgetanalyzer/orchestration.git
-cd orchestration
-
-# Set up local HTTPS certificates
-./scripts/dev/setup-local-https.sh
-
-# Start all services
-docker compose up -d
-
-# Access the application
-# https://app.budgetanalyzer.localhost
-```
-
-See the [orchestration repository](https://github.com/budgetanalyzer/orchestration) for detailed setup instructions.
+**[orchestration repository](https://github.com/budgetanalyzer/orchestration)** — Start here for setup instructions, architecture docs, and local development.
 
 ---
 
