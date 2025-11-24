@@ -136,7 +136,7 @@ This project demonstrates what's achievable when AI augments development:
 
 | Repository | Purpose |
 |------------|---------|
-| [orchestration](https://github.com/budgetanalyzer/orchestration) | Docker Compose orchestration and NGINX gateway configuration |
+| [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind development environment and NGINX gateway configuration |
 | [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 BFF for browser authentication and session management |
 | [token-validation-service](https://github.com/budgetanalyzer/token-validation-service) | JWT signature verification for NGINX auth_request |
 | [transaction-service](https://github.com/budgetanalyzer/transaction-service) | Financial transactions, accounts, and analytics API |
