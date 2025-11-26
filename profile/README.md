@@ -54,7 +54,7 @@ I don't really write code anymore, I just design, plan, refine, and code review.
 
 I think the future is here, and it's pretty exciting.  People aren't into chatbots- neither was I.  Building this project opened my eyes into ways of using and choreographing AI that I hadn't even considered.  It's a pretty exciting time to be alive, I feel like a physicist who was lucky enough to be around in the 1930s and 40s while they were building the bomb.  We don't know where this is gonna take us, but there's no resisting, it's clear this is the path of history.
 
-I think the future is run by architects across various domains...
+This is scary.
 
 ## Vision
 
