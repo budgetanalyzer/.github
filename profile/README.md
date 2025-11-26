@@ -14,6 +14,7 @@ LLMs reliably fail at certain tasks — character counting, bracket matching. Kn
 
 - [Character counting](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/021-self-programming-via-prose.md) — 100% accuracy via forced externalization
 - [Bracket matching](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/022-generalizing-externalization.md) — same technique, different task. 10/10
+- [Multi-digit arithmetic](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/024-arithmetic-externalization.md) — multiplication, division with full traces
 
 The method: force the model to write intermediate state. If it has to write each step, it can't skip to a wrong answer. Prose procedures as programs.
 
