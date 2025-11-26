@@ -6,6 +6,25 @@
 
 ---
 
+## The Thesis: Asking, Not Telling
+
+> **You don't tell AI what to build — you ask what to build, then correct course.**
+>
+> The architecture emerges from dialogue, not diktat. The human becomes the taste function, not the generator.
+
+This is the pattern that built this project. The Budget Analyzer web frontend started with a [492-line seed prompt](https://github.com/budgetanalyzer/budget-analyzer-web/blob/main/reactJS_prompt.txt) — constraints and domain, zero implementation decisions. That prompt went to ChatGPT, Claude, and DeepSeek. All three generated working code. Claude's was most elegant. That's **curation, not specification.**
+
+**Why this works:**
+- **AI has breadth, humans have taste** — AI knows millions of patterns; you know which fits your context
+- **Correction is cheaper than specification** — "Try it with hooks instead" takes seconds vs. hours of detailed specs
+- **Parallel exploration** — Run the same prompt through multiple AIs, pick the best. Minutes instead of weeks.
+
+The human's role becomes: knowing what to ask, recognizing wrong output, and pulling the plug on bad directions.
+
+**[Read the full thesis →](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/023-asking-not-telling.md)**
+
+---
+
 ## Who This Is For
 
 ✨ *This project targets **enterprise architects and senior developers** who want to see production-ready patterns in action—not tutorials or hand-holding. If you're evaluating BFF security patterns, OAuth2 implementation approaches, or AI-assisted development workflows, this is a working reference you can clone, run, and adapt.*
@@ -145,6 +164,7 @@ This project demonstrates what's achievable when AI augments development:
 | [budget-analyzer-web](https://github.com/budgetanalyzer/budget-analyzer-web) | React frontend with multi-currency support |
 | [service-common](https://github.com/budgetanalyzer/service-common) | Shared Java library for all backend services |
 | [basic-repository-template](https://github.com/budgetanalyzer/basic-repository-template) | Template for creating new services |
+| [architecture-conversations](https://github.com/budgetanalyzer/architecture-conversations) | **The philosophical foundation** — conversations exploring AI-assisted development |
 
 > **Note:** The `currency-service` serves as our reference implementation. It demonstrates generic patterns commonly needed in production microservices—patterns we're fleshing out to be reusable across services.
 
