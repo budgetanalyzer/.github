@@ -127,7 +127,7 @@ This project demonstrates what's achievable when AI augments development:
 | Layer | Technologies |
 |-------|-------------|
 | **Frontend** | React, TypeScript, Vite |
-| **Backend** | Spring Boot, Java 17+, Gradle |
+| **Backend** | Spring Boot, Java 24+, Gradle |
 | **Gateway** | NGINX, Spring Cloud Gateway |
 | **Auth** | OAuth2/OIDC, Auth0 |
 | **Infrastructure** | Docker, PostgreSQL, Redis, RabbitMQ |
