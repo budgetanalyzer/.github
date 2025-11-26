@@ -6,6 +6,19 @@
 
 ---
 
+## The Discovery
+
+LLMs reliably fail at certain tasks — character counting, bracket matching. Known problem, no reliable fix.
+
+**We fixed it. Twice.**
+
+- [Character counting](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/021-self-programming-via-prose.md) — 100% accuracy via forced externalization
+- [Bracket matching](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/022-generalizing-externalization.md) — same technique, different task. 10/10
+
+The method: force the model to write intermediate state. If it has to write each step, it can't skip to a wrong answer. Prose procedures as programs.
+
+---
+
 ## The Thesis: Asking, Not Telling
 
 > **You don't tell AI what to build — you ask what to build, then correct course.**
