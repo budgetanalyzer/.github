@@ -177,16 +177,19 @@ This project demonstrates what's achievable when AI augments development:
 | [permission-service](https://github.com/budgetanalyzer/permission-service) | Role management and access delegation (RBAC) |
 | [budget-analyzer-web](https://github.com/budgetanalyzer/budget-analyzer-web) | React frontend with multi-currency support |
 | [service-common](https://github.com/budgetanalyzer/service-common) | Shared Java library for all backend services |
+| [checkstyle-config](https://github.com/budgetanalyzer/checkstyle-config) | Shared checkstyle rules for Java services |
 | [basic-repository-template](https://github.com/budgetanalyzer/basic-repository-template) | Template for creating new services |
+| [workspace](https://github.com/budgetanalyzer/workspace) | **Start here** — Devcontainer entry point, single clone to get everything |
 | [architecture-conversations](https://github.com/budgetanalyzer/architecture-conversations) | **The philosophical foundation** — conversations exploring AI-assisted development |
+| [claude-discovery](https://github.com/budgetanalyzer/claude-discovery) | Experimental AI discovery tool |
 
 > **Note:** The `currency-service` serves as our reference implementation. It demonstrates generic patterns commonly needed in production microservices—patterns we're fleshing out to be reusable across services.
 
 ## Getting Started
 
-✨ *Clone and play. The orchestration repo has everything you need to run the full stack locally with Tilt + Kind.*
+✨ *Single clone to get everything. The workspace repo auto-clones all other repos when you open it in VS Code.*
 
-**[orchestration repository](https://github.com/budgetanalyzer/orchestration)** — Start here for setup instructions, architecture docs, and local development.
+**[workspace repository](https://github.com/budgetanalyzer/workspace)** — Clone this, open in VS Code, click "Reopen in Container", and all repos appear in /workspace/.
 
 ---
 
