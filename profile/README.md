@@ -6,17 +6,17 @@
 
 ---
 
-## The Discovery
+## What We Found
 
-LLMs reliably fail at certain tasks — character counting, bracket matching. Known problem, no reliable fix.
+Back in late 2024, LLMs couldn't reliably count characters or do arithmetic. We figured out a workaround in my bedroom: force the model to write intermediate state. If it has to write each step, it can't skip to a wrong answer.
 
-**We fixed it. Three times.**
+- [Character counting](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/021-self-programming-via-prose.md) — procedure
+- [Bracket matching](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/022-generalizing-externalization.md) — same technique
+- [Multi-digit arithmetic](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/024-arithmetic-externalization.md) — multiplication, division
 
-- [Character counting](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/021-self-programming-via-prose.md) — 100% accuracy via forced externalization
-- [Bracket matching](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/022-generalizing-externalization.md) — same technique, different task. 10/10
-- [Multi-digit arithmetic](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/024-arithmetic-externalization.md) — multiplication, division with full traces
+Turns out the industry solved this around the same time — o1, Grok 3, whatever Google's doing. We don't know if they're using the same mechanism or something different. Models just... do arithmetic now.
 
-The method: force the model to write intermediate state. If it has to write each step, it can't skip to a wrong answer. Prose procedures as programs.
+What's still interesting: the *process* of discovering it. Conversation [028](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/028-the-capability-is-already-out.md) documents the moment we checked ChatGPT and realized they could already do it. The journey has value even when the destination is known.
 
 ---
 
