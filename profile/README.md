@@ -6,6 +6,54 @@
 
 ---
 
+## The Research: Expert Routing Protocol
+
+> **How do you route between 10,000 AI-loadable experts without a graph database?**
+
+You don't build edges. You let each expert describe themselves. The AI interprets.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  SESSION                                                        │
+│  "For plasma confinement, consult physics/plasma/"              │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │ discovers
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  /experts/physics/plasma/                                       │
+│  ├── chen-dynamics.md    "Consult when: MHD instabilities"      │
+│  ├── tanaka-modeling.md  "Consult when: thermal limits"         │
+│  └── ...                                                        │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │ AI interprets → selects
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  LOADED IN ORDER (session decides):                             │
+│  1. chen-dynamics.md    ← sets physics vocabulary               │
+│  2. tanaka-modeling.md  ← adds engineering constraints          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**The Protocol**:
+1. Each expert file self-describes: `"Consult when: [natural language condition]"`
+2. Directories organize (`physics/plasma/`), but don't define identity
+3. AI matches problem → expertise **semantically** (not keyword matching)
+4. Session owner controls composition order—experts don't route themselves
+5. No central registry. No graph edges. No web infrastructure required.
+
+**Why this matters**:
+- **Self-description scales. Graphs don't.** 10K nodes × 10 edges = 100K relationships to maintain. Self-describing files are independently maintainable.
+- **Works on air-gapped networks.** File paths, database keys, closed network URIs—anything resolvable.
+- **Graceful degradation.** Wrong expert selected = suboptimal results, not system failure.
+
+This is infrastructure for scaling AI-human collaboration beyond chatbots. 10,000 researchers' thinking—externalized, discoverable, composable by AI.
+
+**[Full Protocol Specification →](https://github.com/budgetanalyzer/architecture-conversations/blob/main/patterns/expert-routing-protocol.md)**
+
+**[The Conversation That Produced It →](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/056-hierarchical-knowledge-routing.md)**
+
+---
+
 ## What We Found
 
 Back in late 2024, LLMs couldn't reliably count characters or do arithmetic. We figured out a workaround in my bedroom: force the model to write intermediate state. If it has to write each step, it can't skip to a wrong answer.
