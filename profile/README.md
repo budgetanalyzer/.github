@@ -46,7 +46,7 @@ You don't build edges. You let each expert describe themselves. The AI interpret
 - **Works on air-gapped networks.** File paths, database keys, closed network URIs—anything resolvable.
 - **Graceful degradation.** Wrong expert selected = suboptimal results, not system failure.
 
-This is infrastructure for scaling AI-human collaboration beyond chatbots. 10,000 researchers' thinking—externalized, discoverable, composable by AI.
+We think this can solve fusion. 10,000 researchers' thinking—externalized, discoverable, composable by AI.
 
 **[Full Protocol Specification →](https://github.com/budgetanalyzer/architecture-conversations/blob/main/patterns/expert-routing-protocol.md)**
 
