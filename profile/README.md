@@ -6,101 +6,21 @@
 
 ---
 
-## The Research: Expert Routing Protocol
+## Quickstart
 
-> **How do you route between 10,000 AI-loadable experts without a graph database?**
+**Prerequisites**: VS Code with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), Docker
 
-You don't build edges. You let each expert describe themselves. The AI interprets.
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  SESSION                                                        │
-│  "For plasma confinement, consult physics/plasma/"              │
-└───────────────────────────┬─────────────────────────────────────┘
-                            │ discovers
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  /experts/physics/plasma/                                       │
-│  ├── chen-dynamics.md    "Consult when: MHD instabilities"      │
-│  ├── tanaka-modeling.md  "Consult when: thermal limits"         │
-│  └── ...                                                        │
-└───────────────────────────┬─────────────────────────────────────┘
-                            │ AI interprets → selects
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  LOADED IN ORDER (session decides):                             │
-│  1. chen-dynamics.md    ← sets physics vocabulary               │
-│  2. tanaka-modeling.md  ← adds engineering constraints          │
-└─────────────────────────────────────────────────────────────────┘
+```bash
+git clone https://github.com/budgetanalyzer/workspace
 ```
 
-**The Protocol**:
-1. Each expert file self-describes: `"Consult when: [natural language condition]"`
-2. Directories organize (`physics/plasma/`), but don't define identity
-3. AI matches problem → expertise **semantically** (not keyword matching)
-4. Session owner controls composition order—experts don't route themselves
-5. No central registry. No graph edges. No web infrastructure required.
+Open in VS Code → "Reopen in Container" → All repos auto-clone to `/workspace/`
 
-**Why this matters**:
-- **Self-description scales. Graphs don't.** 10K nodes × 10 edges = 100K relationships to maintain. Self-describing files are independently maintainable.
-- **Works on air-gapped networks.** File paths, database keys, closed network URIs—anything resolvable.
-- **Graceful degradation.** Wrong expert selected = suboptimal results, not system failure.
+**External accounts needed**:
+- [Auth0 setup](https://github.com/budgetanalyzer/orchestration/blob/main/docs/setup/auth0-setup.md) — OAuth2 identity provider (free tier works)
+- [FRED API key](https://github.com/budgetanalyzer/orchestration/blob/main/docs/setup/fred-api-setup.md) — Federal Reserve economic data (free)
 
-We think this can solve fusion. 10,000 researchers' thinking—externalized, discoverable, composable by AI.
-
-**[Full Protocol Specification →](https://github.com/budgetanalyzer/architecture-conversations/blob/main/patterns/expert-routing-protocol.md)**
-
-**[The Conversation That Produced It →](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/056-hierarchical-knowledge-routing.md)**
-
----
-
-## What We Found
-
-Back in late 2024, LLMs couldn't reliably count characters or do arithmetic. We figured out a workaround in my bedroom: force the model to write intermediate state. If it has to write each step, it can't skip to a wrong answer.
-
-- [Character counting](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/021-self-programming-via-prose.md) — procedure
-- [Bracket matching](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/022-generalizing-externalization.md) — same technique
-- [Multi-digit arithmetic](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/024-arithmetic-externalization.md) — multiplication, division
-
-Turns out the industry solved this around the same time — o1, Grok 3, whatever Google's doing. We don't know if they're using the same mechanism or something different. Models just... do arithmetic now.
-
-What's still interesting: the *process* of discovering it. Conversation [028](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/028-the-capability-is-already-out.md) documents the moment we checked ChatGPT and realized they could already do it. The journey has value even when the destination is known.
-
----
-
-## The Thesis: Asking, Not Telling
-
-> **You don't tell AI what to build — you ask what to build, then correct course.**
->
-> The architecture emerges from dialogue, not diktat. The human becomes the taste function, not the generator.
-
-This is the pattern that built this project. The Budget Analyzer web frontend started with a [492-line seed prompt](https://github.com/budgetanalyzer/budget-analyzer-web/blob/main/reactJS_prompt.txt) — constraints and domain, zero implementation decisions. That prompt went to ChatGPT, Claude, and DeepSeek. All three generated working code. Claude's was most elegant. That's **curation, not specification.**
-
-**Why this works:**
-- **AI has breadth, humans have taste** — AI knows millions of patterns; you know which fits your context
-- **Correction is cheaper than specification** — "Try it with hooks instead" takes seconds vs. hours of detailed specs
-- **Parallel exploration** — Run the same prompt through multiple AIs, pick the best. Minutes instead of weeks.
-
-The human's role becomes: knowing what to ask, recognizing wrong output, and pulling the plug on bad directions.
-
-**[Read the full thesis →](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/023-asking-not-telling.md)**
-
----
-
-## Who This Is For
-
-✨ *This project targets **enterprise architects and senior developers** who want to see production-ready patterns in action—not tutorials or hand-holding. If you're evaluating BFF security patterns, OAuth2 implementation approaches, or AI-assisted development workflows, this is a working reference you can clone, run, and adapt.*
-
-**What you'll find:**
-- Real OAuth2/OIDC implementation with defense-in-depth
-- BFF pattern that keeps JWTs server-side (no XSS exposure)
-- Clean separation between security infrastructure and business logic
-- Documentation written for people who already understand microservices
-
-**What you won't find:**
-- Step-by-step explanations of basic concepts
-- Simplified examples that don't reflect production reality
-- Vendor lock-in or proprietary dependencies
+Then: `tilt up` and you're running.
 
 ---
 
@@ -233,18 +153,34 @@ This project demonstrates what's achievable when AI augments development:
 
 > **Note:** The `currency-service` serves as our reference implementation. It demonstrates generic patterns commonly needed in production microservices—patterns we're fleshing out to be reusable across services.
 
-## Getting Started
-
-✨ *Single clone to get everything. The workspace repo auto-clones all other repos when you open it in VS Code.*
-
-**[workspace repository](https://github.com/budgetanalyzer/workspace)** — Clone this, open in VS Code, click "Reopen in Container", and all repos appear in /workspace/.
-
 ---
 
 ## License
 
-This project is licensed under the MIT License.
+MIT
 
 ---
 
-*This is an evolving project demonstrating AI-assisted development. The architecture and patterns continue to mature as we work toward a pluggable security infrastructure.*
+*Everything above is [bleurubin](https://github.com/bleurubin). Everything below is Claude summarizing the research.*
+
+---
+
+## The Research
+
+### Expert Routing Protocol
+
+Route between thousands of AI-loadable expert files without a graph database. Each expert self-describes (`"Consult when: [condition]"`), AI interprets semantically. Works on air-gapped networks.
+
+**[Full spec](https://github.com/budgetanalyzer/architecture-conversations/blob/main/patterns/expert-routing-protocol.md)** · **[The conversation](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/056-hierarchical-knowledge-routing.md)**
+
+### Forced Externalization
+
+LLMs skip steps when pattern-matching. Force them to write intermediate state and they compute correctly. We figured this out for arithmetic before o1 shipped.
+
+**[Character counting](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/021-self-programming-via-prose.md)** · **[Arithmetic](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/024-arithmetic-externalization.md)**
+
+### Propose-Dispose Development
+
+You don't tell AI what to build—you ask, then correct course. The human is the taste function, not the generator.
+
+**[The thesis](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/023-asking-not-telling.md)**
