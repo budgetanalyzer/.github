@@ -22,7 +22,7 @@ Open in VS Code → "Reopen in Container" → Follow [Getting Started](https://g
 
 Before diving into code, explore how this architecture emerged:
 
-**[Architecture Conversations](https://github.com/budgetanalyzer/architecture-conversations)** — 80+ conversations documenting architectural decisions, AI collaboration patterns, and the philosophy behind this project
+**[Architecture Conversations](https://github.com/budgetanalyzer/architecture-conversations)** — Conversations documenting architectural decisions, AI collaboration patterns, and the philosophy behind this project
 
 ---
 
