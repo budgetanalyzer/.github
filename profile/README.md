@@ -14,13 +14,7 @@
 git clone https://github.com/budgetanalyzer/workspace
 ```
 
-Open in VS Code → "Reopen in Container" → All repos auto-clone to `/workspace/`
-
-**External accounts needed**:
-- [Auth0 setup](https://github.com/budgetanalyzer/orchestration/blob/main/docs/setup/auth0-setup.md) — OAuth2 identity provider (free tier works)
-- [FRED API key](https://github.com/budgetanalyzer/orchestration/blob/main/docs/setup/fred-api-setup.md) — Federal Reserve economic data (free)
-
-Then: `tilt up` and you're running.
+Open in VS Code → "Reopen in Container" → Follow [Getting Started](https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/getting-started.md)
 
 ---
 
