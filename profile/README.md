@@ -78,7 +78,7 @@ flowchart TB
         EA[ext_authz<br/>Session Validation<br/>Redis-backed]
     end
 
-    subgraph Routing["NGINX API Gateway (:8080)"]
+    subgraph Routing["NGINX API Gateway"]
         direction LR
         ROUTE[Routing + Rate Limiting]
     end
@@ -97,7 +97,7 @@ flowchart TB
     SG -->|Session Dual-Write| Redis
     EA -->|Session Lookup| Redis
     EA -->|Headers Injected| Routing
-    Routing --> Services
+    Routing -->|mTLS| Services
 
     style SG fill:#e1f5fe
     style EA fill:#f3e5f5
@@ -111,7 +111,7 @@ flowchart TB
 | 1 | **Envoy Gateway** | SSL termination, ext_authz enforcement, ingress routing |
 | 2 | **Session Gateway** | OAuth2 flows, HTTP-only cookies, session management |
 | 3 | **ext_authz** | Per-request session validation via Redis, header injection |
-| 4 | **Backend Services** | Data-level authorization (user owns resource) |
+| 4 | **Backend Services** | mTLS-enforced access (Istio STRICT), data-level authorization |
 
 ### Key Security Benefits
 
