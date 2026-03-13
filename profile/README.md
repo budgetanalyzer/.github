@@ -65,17 +65,22 @@ The project quickly became meta.  For example we want to avoid vendor lock-in fo
 flowchart TB
     subgraph Clients
         Browser[Browser]
-        API[API Client / M2M]
     end
 
-    subgraph Ingress["Ingress Controller"]
+    subgraph Gateway["Envoy Gateway (:443)"]
         direction LR
+        SSL[SSL Termination]
+        EXT[ext_authz Enforcement]
     end
 
-    subgraph Security["Security Layer"]
+    subgraph Auth["Auth Layer"]
         SG[Session Gateway<br/>OAuth2 / Sessions<br/>Port 8081]
-        NGINX[NGINX API Gateway<br/>JWT Validation<br/>Port 443]
-        TVS[Token Validation<br/>Service]
+        EA[ext_authz<br/>Session Validation<br/>Redis-backed]
+    end
+
+    subgraph Routing["NGINX API Gateway (:8080)"]
+        direction LR
+        ROUTE[Routing + Rate Limiting]
     end
 
     subgraph Services["Backend Microservices"]
@@ -84,33 +89,34 @@ flowchart TB
         PS[Permission Service]
     end
 
-    Browser -->|Session Cookie| Ingress
-    API -->|JWT| Ingress
+    Redis[(Redis<br/>Session Store)]
 
-    Ingress -->|Browser Traffic| SG
-    Ingress -->|API Traffic| NGINX
-
-    SG -->|JWT| NGINX
-    NGINX -->|Validate| TVS
-    NGINX --> Services
+    Browser -->|HTTPS| Gateway
+    Gateway -->|/auth, /login, /logout| SG
+    Gateway -->|/api/*| EA
+    SG -->|Session Dual-Write| Redis
+    EA -->|Session Lookup| Redis
+    EA -->|Headers Injected| Routing
+    Routing --> Services
 
     style SG fill:#e1f5fe
-    style NGINX fill:#fff3e0
-    style TVS fill:#f3e5f5
+    style EA fill:#f3e5f5
+    style Gateway fill:#fff3e0
 ```
 
 ### Security Layers (Defense in Depth)
 
 | Layer | Component | Responsibility |
 |-------|-----------|----------------|
-| 1 | **Session Gateway** | OAuth2 flows, HTTP-only cookies, server-side JWT storage |
-| 2 | **NGINX API Gateway** | JWT validation, rate limiting, request routing |
-| 3 | **Token Validation Service** | Cryptographic signature verification |
+| 1 | **Envoy Gateway** | SSL termination, ext_authz enforcement, ingress routing |
+| 2 | **Session Gateway** | OAuth2 flows, HTTP-only cookies, session management |
+| 3 | **ext_authz** | Per-request session validation via Redis, header injection |
 | 4 | **Backend Services** | Data-level authorization (user owns resource) |
 
 ### Key Security Benefits
 
-- **JWTs never exposed to browser** — Immune to XSS token theft
+- **Tokens never exposed to browser** — Immune to XSS token theft
+- **Instant session revocation** — Redis key delete terminates access immediately
 - **Identity provider abstraction** — Swap Auth0/Okta/Keycloak without client changes
 - **Pluggable design** — Security infrastructure meant for reuse across organizations
 
@@ -131,7 +137,7 @@ This project demonstrates what's achievable when AI augments development:
 |-------|-------------|
 | **Frontend** | React, TypeScript, Vite |
 | **Backend** | Spring Boot, Java 24+, Gradle |
-| **Gateway** | NGINX, Spring Cloud Gateway |
+| **Gateway** | Envoy Gateway, NGINX |
 | **Auth** | OAuth2/OIDC, Auth0 |
 | **Infrastructure** | Docker, PostgreSQL, Redis, RabbitMQ |
 
@@ -139,9 +145,8 @@ This project demonstrates what's achievable when AI augments development:
 
 | Repository | Purpose |
 |------------|---------|
-| [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind development environment and NGINX gateway configuration |
-| [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 BFF for browser authentication and session management |
-| [token-validation-service](https://github.com/budgetanalyzer/token-validation-service) | JWT signature verification for NGINX auth_request |
+| [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind development environment, Envoy Gateway, ext_authz, NGINX configuration |
+| [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 BFF, session management, Redis dual-write for ext_authz validation |
 | [transaction-service](https://github.com/budgetanalyzer/transaction-service) | Financial transactions, accounts, and analytics API |
 | [currency-service](https://github.com/budgetanalyzer/currency-service) | Currency management and exchange rates — **Demo service showcasing advanced microservice patterns** |
 | [permission-service](https://github.com/budgetanalyzer/permission-service) | Role management and access delegation (RBAC) |
