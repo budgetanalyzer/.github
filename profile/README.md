@@ -47,7 +47,7 @@ We're building a **pluggable security and authorization infrastructure** that an
 The goal isn't just a budget app. It's a reusable foundation that demonstrates:
 - Production-ready OAuth2/OIDC authentication
 - Server-side session management (BFF pattern)
-- JWT validation at the API gateway
+- Per-request session validation at the gateway
 - Role-based access control with delegation
 - Defense-in-depth security layers
 
@@ -67,10 +67,11 @@ flowchart TB
         Browser[Browser]
     end
 
-    subgraph Gateway["Envoy Gateway (:443)"]
+    subgraph Ingress["Istio Ingress Gateway (:443)"]
         direction LR
         SSL[SSL Termination]
-        EXT[ext_authz Enforcement]
+        EXT["ext_authz (inline on /api/*)"]
+        THROTTLE[Auth-Path Throttling]
     end
 
     subgraph Auth["Auth Layer"]
@@ -91,24 +92,25 @@ flowchart TB
 
     Redis[(Redis<br/>Session Store)]
 
-    Browser -->|HTTPS| Gateway
-    Gateway -->|/auth, /login, /logout| SG
-    Gateway -->|/api/*| EA
-    SG -->|Session Dual-Write| Redis
+    Browser -->|HTTPS| Ingress
+    Ingress -->|"/auth/*, /oauth2/*, /logout, /user"| SG
+    Ingress -->|"/api/* (ext_authz approved)"| Routing
+    Ingress -->|"/, /login (frontend)"| Routing
+    EXT -.->|Session Lookup| EA
     EA -->|Session Lookup| Redis
-    EA -->|Headers Injected| Routing
+    SG -->|Session Dual-Write| Redis
     Routing -->|mTLS| Services
 
     style SG fill:#e1f5fe
     style EA fill:#f3e5f5
-    style Gateway fill:#fff3e0
+    style Ingress fill:#fff3e0
 ```
 
 ### Security Layers (Defense in Depth)
 
 | Layer | Component | Responsibility |
 |-------|-----------|----------------|
-| 1 | **Envoy Gateway** | SSL termination, ext_authz enforcement, ingress routing |
+| 1 | **Istio Ingress Gateway** | SSL termination, ext_authz enforcement, auth-path throttling, ingress routing |
 | 2 | **Session Gateway** | OAuth2 flows, HTTP-only cookies, session management |
 | 3 | **ext_authz** | Per-request session validation via Redis, header injection |
 | 4 | **Backend Services** | mTLS-enforced access (Istio STRICT), data-level authorization |
@@ -137,9 +139,9 @@ This project demonstrates what's achievable when AI augments development:
 |-------|-------------|
 | **Frontend** | React, TypeScript, Vite |
 | **Backend** | Spring Boot, Java 24+, Gradle |
-| **Gateway** | Envoy Gateway, NGINX |
+| **Gateway** | Istio Ingress Gateway, NGINX |
 | **Auth** | OAuth2/OIDC, Auth0 |
-| **Infrastructure** | Docker, PostgreSQL, Redis, RabbitMQ |
+| **Infrastructure** | Kubernetes (Kind), Tilt, Istio, Calico, Docker, PostgreSQL, Redis, RabbitMQ |
 
 ## Live Development in Kubernetes
 
@@ -157,7 +159,7 @@ Most teams choose: fast local dev (unfaithful) or real Kubernetes (slow rebuilds
 
 | Repository | Purpose |
 |------------|---------|
-| [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind development environment, Envoy Gateway, ext_authz, NGINX configuration |
+| [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind development environment, Istio ingress, ext_authz, NGINX configuration |
 | [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 BFF, session management, Redis dual-write for ext_authz validation |
 | [transaction-service](https://github.com/budgetanalyzer/transaction-service) | Financial transactions, accounts, and analytics API |
 | [currency-service](https://github.com/budgetanalyzer/currency-service) | Currency management and exchange rates — **Demo service showcasing advanced microservice patterns** |
