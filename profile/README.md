@@ -141,6 +141,18 @@ This project demonstrates what's achievable when AI augments development:
 | **Auth** | OAuth2/OIDC, Auth0 |
 | **Infrastructure** | Docker, PostgreSQL, Redis, RabbitMQ |
 
+## Live Development in Kubernetes
+
+No tradeoff between development speed and production fidelity. Edit code locally — changes reach the running Kubernetes pod in seconds without image rebuilds or pod restarts, while Istio mTLS, Calico network policies, ext_authz session validation, and TLS-encrypted infrastructure stay active around it.
+
+| Stack | Inner-loop mechanism |
+|-------|---------------------|
+| **Java (Spring Boot)** | Gradle compiles on the host, Tilt syncs the JAR into the pod, process restarts — seconds |
+| **React (Vite)** | Tilt syncs source files, Vite HMR hot-patches the browser — sub-second |
+| **Shared library** | `service-common` change cascades to all downstream services automatically |
+
+Most teams choose: fast local dev (unfaithful) or real Kubernetes (slow rebuilds). This setup gives both. Details in the [live development pipeline docs](https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/local-environment.md#live-development-pipeline).
+
 ## Repositories
 
 | Repository | Purpose |
