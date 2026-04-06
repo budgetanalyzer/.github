@@ -28,7 +28,7 @@ Before diving into code, explore how this architecture emerged:
 
 ## Background
 
-This project started as a simple re-fresh of my spring boot microservices skills after a 2 year sabbatical.  I wanted to solve the relatively simple problem of reconciling multiple bank accounts in multiple currencies, so I figured I'd do a quick microservice + ReactJS frontend and go find a consulting role as I've been doing the last few years.  I was shocked to finish that in a couple weeks after gettting comfortable using Claude Code, so I expanded the scope of the project significantly.  This is a full production grade best practices Backend For Frontend Oauth2 Security implementation for an auditable compliance-oriented financial application.  But really it's just an AI sandbox.  And now I'm excited to go back to building stuff and am looking to work with people that get what this is.
+This project started as a simple re-fresh of my spring boot microservices skills after a 2 year sabbatical.  I wanted to solve the relatively simple problem of reconciling multiple bank accounts in multiple currencies, so I figured I'd do a quick microservice + ReactJS frontend and go find a consulting role as I've been doing the last few years.  I was shocked to finish that in a couple weeks after gettting comfortable using Claude Code, so I expanded the scope of the project significantly.  This is a full production grade best practices session-based edge authorization with OAuth2 implementation for an auditable compliance-oriented financial application.  But really it's just an AI sandbox.  And now I'm excited to go back to building stuff and am looking to work with people that get what this is.
 
 ✨ *Using **Claude Code**, we rapidly expanded from a basic app to a full enterprise-grade security architecture. The AI didn't just write code—it helped design systems, document decisions, and implement patterns that would typically require a dedicated team.*   (*Claude wrote that*)
 
@@ -46,7 +46,7 @@ We're building a **pluggable security and authorization infrastructure** that an
 
 The goal isn't just a budget app. It's a reusable foundation that demonstrates:
 - Production-ready OAuth2/OIDC authentication
-- Server-side session management (BFF pattern)
+- Server-side session management (opaque sessions in Redis)
 - Per-request session validation at the gateway
 - Role-based access control with delegation
 - Defense-in-depth security layers
@@ -93,12 +93,12 @@ flowchart TB
     Redis[(Redis<br/>Session Store)]
 
     Browser -->|HTTPS| Ingress
-    Ingress -->|"/auth/*, /oauth2/*, /logout, /user"| SG
+    Ingress -->|"/auth/*, /oauth2/*, /login/oauth2/*, /logout"| SG
     Ingress -->|"/api/* (ext_authz approved)"| Routing
     Ingress -->|"/, /login (frontend)"| Routing
     EXT -.->|Session Lookup| EA
     EA -->|Session Lookup| Redis
-    SG -->|Session Dual-Write| Redis
+    SG -->|Session Write| Redis
     Routing -->|mTLS| Services
 
     style SG fill:#e1f5fe
@@ -160,7 +160,7 @@ Most teams choose: fast local dev (unfaithful) or real Kubernetes (slow rebuilds
 | Repository | Purpose |
 |------------|---------|
 | [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind development environment, Istio ingress, ext_authz, NGINX configuration |
-| [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 BFF, session management, Redis dual-write for ext_authz validation |
+| [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 authentication service, session management, ext_authz validation |
 | [transaction-service](https://github.com/budgetanalyzer/transaction-service) | Financial transactions, accounts, and analytics API |
 | [currency-service](https://github.com/budgetanalyzer/currency-service) | Currency management and exchange rates — **Demo service showcasing advanced microservice patterns** |
 | [permission-service](https://github.com/budgetanalyzer/permission-service) | Role management and access delegation (RBAC) |
