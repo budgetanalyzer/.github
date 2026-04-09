@@ -53,11 +53,7 @@ The goal isn't just a budget app. It's a reusable foundation that demonstrates:
 
 Once these patterns mature, this becomes a template for enterprise applications—drop in your business logic and inherit battle-tested security.
 
-But we're also in parallel figuring out how to code with AI.  This is the IDE/coding standard baseline for human/AI development.  All opensource, I envision us including url resources for CLAUDE.md files.  Very standardized code rules, it'd be cool to keep it here, but i'm down if someone has a better idea.  All the code is gonna look generic and that's OK, no need for style, markdown and simple code, let's standardardize the interface to AI.  VS Code open source, bring your own key  is the way it goes, it's not up for debate.  They aren't gonna control this.  And here's the thing, once you communicate with AI using code you realize that's the only interface it has to the external world.  Software architects are the new high priests, we speak AI.  AI is already here, this is all Claude Opus 4.5.  We're not waiting on the next model.  This isn't a toy for the masses, it's such a different experience as a software architect.  It just doesn't have any way to communicate other than text, and yeah, chatbots are weak.  
-
-(running out of breath)
-
-The project quickly became meta.  For example we want to avoid vendor lock-in for AI service providers.  We should be able to swap out and experiment with Gemini and Claude and whatever comes next.  The criticism I keep hearing about using AI for development is that it's great for greenfield projects like this, but it breaks for a real company with a large complex codebase.  My hypothesis is that we simply haven't quite formalized the best practices for doing those migrations, but I think it's possible to introduce these AI development tools into a mature system by starting on leaf nodes and working your way up documenting functionality.  For example create a CLAUDE.md file in a single microservice or piece of the architecture and focus on getting it working well there, and then expand outwards.  I think it's a mistake to try to use a top-down approach introducing these tools.
+But we're also in parallel figuring out how to code with AI.  The project quickly became meta.  For example we want to avoid vendor lock-in for AI service providers.  We should be able to swap out and experiment with Codex and Claude and whatever comes next.  The criticism I keep hearing about using AI for development is that it's great for greenfield projects like this, but it breaks for a real company with a large complex codebase.  My hypothesis is that we simply haven't quite formalized the best practices for doing those migrations, but I think it's possible to introduce these AI development tools into a mature system by starting on leaf nodes and working your way up documenting functionality.  For example create a AGENTS.md file in a single microservice or piece of the architecture and focus on getting it working well there, and then expand outwards.  I think it's a mistake to try to use a top-down approach introducing these tools.
 
 ## Architecture
 
@@ -170,7 +166,6 @@ Most teams choose: fast local dev (unfaithful) or real Kubernetes (slow rebuilds
 | [basic-repository-template](https://github.com/budgetanalyzer/basic-repository-template) | Template for creating new services |
 | [workspace](https://github.com/budgetanalyzer/workspace) | **Start here** — Devcontainer entry point, single clone to get everything |
 | [architecture-conversations](https://github.com/budgetanalyzer/architecture-conversations) | **The philosophical foundation** — conversations exploring AI-assisted development |
-| [claude-discovery](https://github.com/budgetanalyzer/claude-discovery) | Experimental AI discovery tool |
 
 > **Note:** The `currency-service` serves as our reference implementation. It demonstrates generic patterns commonly needed in production microservices—patterns we're fleshing out to be reusable across services.
 
@@ -182,26 +177,4 @@ MIT
 
 ---
 
-*Everything above is [bleurubin](https://github.com/bleurubin). Everything below is Claude summarizing the research.*
 
----
-
-## The Research
-
-### Expert Routing Protocol
-
-Route between thousands of AI-loadable expert files without a graph database. Each expert self-describes (`"Consult when: [condition]"`), AI interprets semantically. Works on air-gapped networks.
-
-**[Full spec](https://github.com/budgetanalyzer/architecture-conversations/blob/main/patterns/expert-routing-protocol.md)** · **[The conversation](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/056-hierarchical-knowledge-routing.md)**
-
-### Forced Externalization
-
-LLMs skip steps when pattern-matching. Force them to write intermediate state and they compute correctly. We figured this out for arithmetic before o1 shipped.
-
-**[Character counting](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/021-self-programming-via-prose.md)** · **[Arithmetic](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/024-arithmetic-externalization.md)**
-
-### Propose-Dispose Development
-
-You don't tell AI what to build—you ask, then correct course. The human is the taste function, not the generator.
-
-**[The thesis](https://github.com/budgetanalyzer/architecture-conversations/blob/main/conversations/023-asking-not-telling.md)**
