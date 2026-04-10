@@ -97,9 +97,9 @@ flowchart TB
     SG -->|Session Write| Redis
     Routing -->|mTLS| Services
 
-    style SG fill:#e1f5fe
-    style EA fill:#f3e5f5
-    style Ingress fill:#fff3e0
+    style SG fill:#e1f5fe,color:#0d47a1
+    style EA fill:#f3e5f5,color:#4a148c
+    style Ingress fill:#fff3e0,color:#e65100
 ```
 
 ### Security Layers (Defense in Depth)
