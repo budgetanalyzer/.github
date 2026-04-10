@@ -48,7 +48,7 @@ The goal isn't just a budget app. It's a reusable foundation that demonstrates:
 - Production-ready OAuth2/OIDC authentication
 - Server-side session management (opaque sessions in Redis)
 - Per-request session validation at the gateway
-- Role-based access control with delegation
+- Permissions-based access control
 - Defense-in-depth security layers
 
 Once these patterns mature, this becomes a template for enterprise applications—drop in your business logic and inherit battle-tested security.
