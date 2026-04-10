@@ -16,16 +16,6 @@ git clone https://github.com/budgetanalyzer/workspace
 
 Open in VS Code → "Reopen in Container" → Follow [Getting Started](https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/getting-started.md)
 
----
-
-## Understanding the Approach
-
-Before diving into code, explore how this architecture emerged:
-
-**[Architecture Conversations](https://github.com/budgetanalyzer/architecture-conversations)** — Conversations documenting architectural decisions, AI collaboration patterns, and the philosophy behind this project
-
----
-
 ## Background
 
 This project started as a simple re-fresh of my spring boot microservices skills after a 2 year sabbatical.  I wanted to solve the relatively simple problem of reconciling multiple bank accounts in multiple currencies, so I figured I'd do a quick microservice + ReactJS frontend and go find a consulting role as I've been doing the last few years.  I was shocked to finish that in a couple weeks after gettting comfortable using Claude Code, so I expanded the scope of the project significantly.  This is a full production grade best practices session-based edge authorization with OAuth2 implementation for an auditable compliance-oriented financial application.  But really it's just an AI sandbox.  And now I'm excited to go back to building stuff and am looking to work with people that get what this is.
@@ -165,7 +155,6 @@ Most teams choose: fast local dev (unfaithful) or real Kubernetes (slow rebuilds
 | [checkstyle-config](https://github.com/budgetanalyzer/checkstyle-config) | Shared checkstyle rules for Java services |
 | [basic-repository-template](https://github.com/budgetanalyzer/basic-repository-template) | Template for creating new services |
 | [workspace](https://github.com/budgetanalyzer/workspace) | **Start here** — Devcontainer entry point, single clone to get everything |
-| [architecture-conversations](https://github.com/budgetanalyzer/architecture-conversations) | **The philosophical foundation** — conversations exploring AI-assisted development |
 
 > **Note:** The `currency-service` serves as our reference implementation. It demonstrates generic patterns commonly needed in production microservices—patterns we're fleshing out to be reusable across services.
 
