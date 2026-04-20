@@ -4,6 +4,10 @@
 
 **Production-grade microservices security infrastructure and ReactJS frontend built with AI-assisted development**
 
+[Demo App](https://demo.budgetanalyzer.org)
+
+[Deployed API Documentation](https://demo.budgetanalyzer.org/api-docs)
+
 ---
 
 ## Quickstart
