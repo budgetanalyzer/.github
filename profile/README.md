@@ -41,7 +41,7 @@ The goal isn't just a budget app. It's a reusable foundation that demonstrates:
 
 Once these patterns mature, this becomes a template for enterprise applications—drop in your business logic and inherit battle-tested security.
 
-But we're also in parallel figuring out how to code with AI.  The project quickly became meta.  For example we want to avoid vendor lock-in for AI service providers.  We should be able to swap out and experiment with Codex and Claude and whatever comes next.  The criticism I keep hearing about using AI for development is that it's great for greenfield projects like this, but it breaks for a real company with a large complex codebase.  My hypothesis is that we simply haven't quite formalized the best practices for doing those migrations, but I think it's possible to introduce these AI development tools into a mature system by starting on leaf nodes and working your way up documenting functionality.  For example create a AGENTS.md file in a single microservice or piece of the architecture and focus on getting it working well there, and then expand outwards.  I think it's a mistake to try to use a top-down approach introducing these tools.
+But we're also in parallel figuring out how to code with AI in a production codebase.  For example we want to avoid vendor lock-in for AI service providers.  We should be able to swap out and experiment with Codex and Claude and whatever comes next.  We use AGENTS.md and avoid using all of the Claude Code proprietary skills and workflows specifically to be able to swap out appropriate models for different tasks.
 
 ## Architecture
 
