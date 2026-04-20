@@ -22,13 +22,7 @@ This project started as a simple re-fresh of my spring boot microservices skills
 
 ✨ *Using **Claude Code**, we rapidly expanded from a basic app to a full enterprise-grade security architecture. The AI didn't just write code—it helped design systems, document decisions, and implement patterns that would typically require a dedicated team.*   (*Claude wrote that*)
 
-So Claude's right, that's exactly it.  I had previously tried using copilot and code assist and was thoroughly unimpressed.  I didn't grok it until i stopped trying to use it as a code assist tool but instead use it as a pair programmer for design and implementation.  We discussed and interated on plans, if you watch the repo I frequently check in plans to give an idea of how detailed they get.  I didn't type a line of code in [budget-analyzer-web](https://github.com/budgetanalyzer/budget-analyzer-web), but that is a fully functional ReactJS app using best practices from [bulletproof react](https://github.com/alan2207/bulletproof-react).
-
-I don't really write code anymore, I just design, plan, refine, and code review.  It's easier to just tell Claude to change a variable name because it will rename the variable, fix all the javadocs, and update any random documentation that mentioned the variable name.  I normally have a bunch of terminals all grinding away working on plans in the various services in parallel, it's like a video game.
-
-I think the future is here, and it's pretty exciting.  People aren't into chatbots- neither was I.  Building this project opened my eyes into ways of using and choreographing AI that I hadn't even considered.  It's a pretty exciting time to be alive, I feel like a physicist who was lucky enough to be around in the 1930s and 40s while they were building the bomb.  We don't know where this is gonna take us, but there's no resisting, it's clear this is the path of history.
-
-This is scary.
+Once I realized that I could use AI as a peer collaborator, I worked with Claude and Codex to build a system an order of magnitude more advanced than my initial plan.  I wanted to see how agents perform in real production environments, so I created my own "Pet Store" here in budgetanalyzer and built a fully deployed local dev/production parity web application demonstrating modern patterns for application security.  The budgetanalyzer app and organaization are just the vehicle to keep myself honest about production grade complexity that we tend to hand wave for demo projects. 
 
 ## Vision
 
