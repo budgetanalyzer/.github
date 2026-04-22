@@ -24,7 +24,7 @@ A multi-repo reference application built to exercise modern backend security pat
 | Repository | What it demonstrates |
 |------------|---------------------|
 | [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 flows, session management, ext_authz validation — the core security implementation |
-| [currency-service](https://github.com/budgetanalyzer/currency-service) | Reference Spring Boot service — scheduled jobs with ShedLock, RabbitMQ with transactional outbox (Spring Modulith), Redis caching, OpenAPI, Flyway, provider abstraction |
+| [currency-service](https://github.com/budgetanalyzer/currency-service) | Reference Spring Boot service — scheduled jobs with ShedLock, RabbitMQ with transactional outbox (Spring Modulith), Redis caching, FRED API integration, OpenAPI, Flyway |
 | [orchestration](https://github.com/budgetanalyzer/orchestration) | Kubernetes local dev environment, Istio ingress, NGINX gateway, infrastructure-as-code |
 
 To run the full stack: clone [workspace](https://github.com/budgetanalyzer/workspace) and open in VS Code Dev Containers.
