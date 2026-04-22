@@ -37,7 +37,7 @@ flowchart TB
         Browser[Browser]
     end
 
-    subgraph Ingress["Istio Ingress Gateway (:443)"]
+    subgraph Ingress["Istio Ingress Gateway"]
         direction LR
         SSL[SSL Termination]
         EXT["ext_authz (inline on /api/*)"]
