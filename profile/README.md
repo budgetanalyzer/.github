@@ -2,46 +2,32 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Production-grade microservices security infrastructure and ReactJS frontend built with AI-assisted development**
+**Production-grade microservices security infrastructure demonstrating session-based edge authorization, OAuth2/OIDC authentication, and Kubernetes-native development workflows.**
 
-[Demo App](https://demo.budgetanalyzer.org)
-
-[Deployed API Documentation](https://demo.budgetanalyzer.org/api-docs)
+[Demo App](https://demo.budgetanalyzer.org) | [API Documentation](https://demo.budgetanalyzer.org/api-docs)
 
 ---
 
-## Quickstart
+## Overview
 
-**Prerequisites**: VS Code with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), Docker
+A multi-repo reference application built to exercise modern backend security patterns in a production-style environment. The actual domain (personal finance) is deliberately simple — the focus is on infrastructure, security boundaries, and platform workflow.
 
-```bash
-git clone https://github.com/budgetanalyzer/workspace
-```
+**Core technical areas:**
+- Session-based edge authorization with opaque tokens (no JWTs exposed to browser)
+- OAuth2/OIDC authentication with server-side session management
+- Per-request session validation via Istio ext_authz and Redis
+- Kubernetes-native local development with live reload and full mTLS
+- Defense-in-depth security layers from ingress to backend
 
-Open in VS Code → "Reopen in Container" → Follow [Getting Started](https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/getting-started.md)
+## Start Here
 
-## Background
+| Repository | What it demonstrates |
+|------------|---------------------|
+| [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 flows, session management, ext_authz validation — the core security implementation |
+| [currency-service](https://github.com/budgetanalyzer/currency-service) | Reference Spring Boot service — scheduled jobs with ShedLock, RabbitMQ with transactional outbox (Spring Modulith), Redis caching, OpenAPI, Flyway, provider abstraction |
+| [orchestration](https://github.com/budgetanalyzer/orchestration) | Kubernetes local dev environment, Istio ingress, NGINX gateway, infrastructure-as-code |
 
-This project started as a simple re-fresh of my spring boot microservices skills after a 2 year sabbatical.  I wanted to solve the relatively simple problem of reconciling multiple bank accounts in multiple currencies, so I figured I'd do a quick microservice + ReactJS frontend and go find a consulting role as I've been doing the last few years.  I was shocked to finish that in a couple weeks after gettting comfortable using Claude Code, so I expanded the scope of the project significantly.  This is a full production grade best practices session-based edge authorization with OAuth2 implementation for a distributed microservices application with end-to-end observability.  But really it's just an AI sandbox.  And now I'm excited to go back to building stuff and am looking to work with people that get what this is.
-
-✨ *Using **Claude Code**, we rapidly expanded from a basic app to a full enterprise-grade security architecture. The AI didn't just write code—it helped design systems, document decisions, and implement patterns that would typically require a dedicated team.*   (*Claude wrote that*)
-
-Once I realized that I could use AI as a peer collaborator, I worked with Claude and Codex to build a system an order of magnitude more advanced than my initial plan.  I wanted to see how agents perform in real production environments, so I created my own "Pet Store" here in budgetanalyzer and built a fully deployed local dev/production parity web application demonstrating modern patterns for application security.  The budgetanalyzer app and organaization are just the vehicle to keep myself honest about production grade complexity that we tend to hand wave for demo projects. 
-
-## Vision
-
-We're building a **pluggable security and authorization infrastructure** that any company can adopt.
-
-The goal isn't just a budget app. It's a reusable foundation that demonstrates:
-- Production-ready OAuth2/OIDC authentication
-- Server-side session management (opaque sessions in Redis)
-- Per-request session validation at the gateway
-- Permissions-based access control
-- Defense-in-depth security layers
-
-Once these patterns mature, this becomes a template for enterprise applications—drop in your business logic and inherit battle-tested security.
-
-But we're also in parallel figuring out how to code with AI in a production codebase.  For example we want to avoid vendor lock-in for AI service providers.  We should be able to swap out and experiment with Codex and Claude and whatever comes next.  We use AGENTS.md and avoid using all of the Claude Code proprietary skills and workflows specifically to be able to swap out appropriate models for different tasks.
+To run the full stack: clone [workspace](https://github.com/budgetanalyzer/workspace) and open in VS Code Dev Containers.
 
 ## Architecture
 
@@ -90,32 +76,31 @@ flowchart TB
     style Ingress fill:#fff3e0,color:#e65100
 ```
 
-### Security Layers (Defense in Depth)
+### Security Layers
 
 | Layer | Component | Responsibility |
 |-------|-----------|----------------|
-| 1 | **Istio Ingress Gateway** | SSL termination, ext_authz enforcement, auth-path throttling, ingress routing |
-| 2 | **Session Gateway** | OAuth2 flows, HTTP-only cookies, session management |
+| 1 | **Istio Ingress Gateway** | SSL termination, ext_authz enforcement, auth-path throttling |
+| 2 | **Session Gateway** | OAuth2 flows, HTTP-only cookies, session lifecycle |
 | 3 | **ext_authz** | Per-request session validation via Redis, header injection |
 | 4 | **Backend Services** | mTLS-enforced access (Istio STRICT), data-level authorization |
 
-### Key Security Benefits
+**Key design decisions:**
+- Tokens never exposed to browser — immune to XSS token theft
+- Instant session revocation — Redis key delete terminates access immediately
+- Identity provider abstraction — swap Auth0/Okta/Keycloak without client changes
 
-- **Tokens never exposed to browser** — Immune to XSS token theft
-- **Instant session revocation** — Redis key delete terminates access immediately
-- **Identity provider abstraction** — Swap Auth0/Okta/Keycloak without client changes
-- **Pluggable design** — Security infrastructure meant for reuse across organizations
+## Local Development
 
-## AI-Assisted Development
+Live reload in Kubernetes without sacrificing production fidelity. Code changes reach running pods in seconds while Istio mTLS, Calico network policies, and ext_authz validation stay active.
 
-This project demonstrates what's achievable when AI augments development:
+| Stack | Inner-loop mechanism |
+|-------|---------------------|
+| **Java (Spring Boot)** | Gradle compiles on host, Tilt syncs JAR into pod, process restarts |
+| **React (Vite)** | Tilt syncs source files, Vite HMR hot-patches browser |
+| **Shared library** | `service-common` changes cascade to downstream services automatically |
 
-- **Architecture design** — Security patterns, component responsibilities, data flows
-- **Implementation** — Services, configurations, and integrations
-- **Documentation** — Living docs that stay current with the code
-- **Code review** — Pattern consistency and security considerations
-
-✨ *The rapid expansion from simple app to enterprise architecture was only possible through AI assistance. This isn't just a showcase—it's a proof point for AI-augmented software development.*
+See [local environment docs](https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/local-environment.md) for setup details.
 
 ## Technology Stack
 
@@ -127,41 +112,37 @@ This project demonstrates what's achievable when AI augments development:
 | **Auth** | OAuth2/OIDC, Auth0 |
 | **Infrastructure** | Kubernetes (Kind), Tilt, Istio, Calico, Docker, PostgreSQL, Redis, RabbitMQ |
 
-## Live Development in Kubernetes
-
-No tradeoff between development speed and production fidelity. Edit code locally — changes reach the running Kubernetes pod in seconds without image rebuilds or pod restarts, while Istio mTLS, Calico network policies, ext_authz session validation, and TLS-encrypted infrastructure stay active around it.
-
-| Stack | Inner-loop mechanism |
-|-------|---------------------|
-| **Java (Spring Boot)** | Gradle compiles on the host, Tilt syncs the JAR into the pod, process restarts — seconds |
-| **React (Vite)** | Tilt syncs source files, Vite HMR hot-patches the browser — sub-second |
-| **Shared library** | `service-common` change cascades to all downstream services automatically |
-
-Most teams choose: fast local dev (unfaithful) or real Kubernetes (slow rebuilds). This setup gives both. Details in the [live development pipeline docs](https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/local-environment.md#live-development-pipeline).
-
-## Repositories
+## All Repositories
 
 | Repository | Purpose |
 |------------|---------|
-| [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind development environment, Istio ingress, ext_authz, NGINX configuration |
-| [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 authentication service, session management, ext_authz validation |
-| [transaction-service](https://github.com/budgetanalyzer/transaction-service) | Financial transactions, accounts, and analytics API |
-| [currency-service](https://github.com/budgetanalyzer/currency-service) | Currency management and exchange rates — **Demo service showcasing advanced microservice patterns** |
-| [permission-service](https://github.com/budgetanalyzer/permission-service) | Role management and access delegation (RBAC) |
-| [budget-analyzer-web](https://github.com/budgetanalyzer/budget-analyzer-web) | React frontend with multi-currency support |
-| [service-common](https://github.com/budgetanalyzer/service-common) | Shared Java library for all backend services |
-| [checkstyle-config](https://github.com/budgetanalyzer/checkstyle-config) | Shared checkstyle rules for Java services |
-| [basic-repository-template](https://github.com/budgetanalyzer/basic-repository-template) | Template for creating new services |
-| [workspace](https://github.com/budgetanalyzer/workspace) | **Start here** — Devcontainer entry point, single clone to get everything |
+| [session-gateway](https://github.com/budgetanalyzer/session-gateway) | OAuth2 authentication, session management, ext_authz validation |
+| [orchestration](https://github.com/budgetanalyzer/orchestration) | Tilt + Kind environment, Istio ingress, NGINX configuration |
+| [transaction-service](https://github.com/budgetanalyzer/transaction-service) | Financial transactions, accounts, analytics API |
+| [currency-service](https://github.com/budgetanalyzer/currency-service) | Reference Spring Boot service with production patterns |
+| [permission-service](https://github.com/budgetanalyzer/permission-service) | Role management and access delegation |
+| [budget-analyzer-web](https://github.com/budgetanalyzer/budget-analyzer-web) | React frontend |
+| [service-common](https://github.com/budgetanalyzer/service-common) | Shared Java library for backend services |
+| [workspace](https://github.com/budgetanalyzer/workspace) | Devcontainer entry point |
 
-> **Note:** The `currency-service` serves as our reference implementation. It demonstrates generic patterns commonly needed in production microservices—patterns we're fleshing out to be reusable across services.
+## Development Approach
+
+Built with AI-assisted development using Claude Code and Codex. Architecture decisions, implementation, and documentation were developed iteratively with AI as a collaborative tool.
+
+---
+
+## Quickstart
+
+**Prerequisites**: VS Code with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), Docker
+
+```bash
+git clone https://github.com/budgetanalyzer/workspace
+```
+
+Open in VS Code → "Reopen in Container" → Follow [Getting Started](https://github.com/budgetanalyzer/orchestration/blob/main/docs/development/getting-started.md)
 
 ---
 
 ## License
 
 MIT
-
----
-
-
